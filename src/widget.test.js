@@ -1,5 +1,6 @@
-import {test, expect, is} from "@benchristel/taste"
-import {generateHtml, htmlEscape, view} from "./html.js"
+import {test, expect} from "@benchristel/taste"
+import {isDisregardingSpaces, contains} from "./lib/testing.js"
+import {generateHtml, view} from "./widget.js"
 
 test("the webring html", {
   "points all links to the hub when there are no sites in the webring"() {
@@ -62,26 +63,3 @@ test("view", {
   },
 })
 
-test("htmlEscape", {
-  "escapes special characters"() {
-    expect(htmlEscape(`<>&'"<>&'"`), is, "&lt;&gt;&amp;&#39;&quot;&lt;&gt;&amp;&#39;&quot;")
-  },
-})
-
-function isDisregardingSpaces(rawExpected, rawActual) {
-  if (typeof rawExpected !== "string") return false;
-  if (typeof rawActual !== "string") return false;
-
-  const expected = stripSpacesFromHTML(rawExpected)
-  const actual = stripSpacesFromHTML(rawActual)
-
-  return expected === actual
-}
-
-function stripSpacesFromHTML(html) {
-  return html.replace(/\s+/g, " ").replace(/ ?([<>]) ?/g, "$1")
-}
-
-function contains(expectedSubstring, s) {
-  return s.includes(expectedSubstring)
-}

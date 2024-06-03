@@ -1,4 +1,5 @@
-import {urlEscape} from "./urls.js"
+import {urlEscape} from "./lib/urls.js"
+import {htmlEscape} from "./lib/html.js"
 
 export function generateHtml(config) {
   return view(model(config))
@@ -29,13 +30,4 @@ export function view(model) {
       </div>
     </div>
   `
-}
-
-export function htmlEscape(html) {
-  return String(html)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;")
 }
