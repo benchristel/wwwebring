@@ -1,19 +1,9 @@
 import {urlEscape} from "./lib/urls.js"
 import {htmlEscape} from "./lib/html.js"
+import {model} from "./domain/ring.js"
 
 export function generateHtml(config) {
   return view(model(config))
-}
-
-export function model(config) {
-  return {
-    prevUrl: config.hub,
-    prevTitle: config.name,
-    hubUrl: config.hub,
-    hubTitle: config.name,
-    nextUrl: config.hub,
-    nextTitle: config.name,
-  }
 }
 
 export function view(model) {
