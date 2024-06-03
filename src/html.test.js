@@ -1,5 +1,5 @@
-import {test, expect} from "@benchristel/taste"
-import {generateHtml, view} from "./html.js"
+import {test, expect, is} from "@benchristel/taste"
+import {generateHtml, htmlEscape, view} from "./html.js"
 
 test("the webring html", {
   "points all links to the hub when there are no sites in the webring"() {
@@ -44,6 +44,27 @@ test("view", {
   "url-encodes the 'hub' link href"() {
     const html = view({hubUrl: "http://foo.com/a b"})
     expect(html, contains, "http://foo.com/a%20b")
+  },
+
+  "html-escapes the 'previous' link title"() {
+    const html = view({prevTitle: "<wow>"})
+    expect(html, contains, "&lt;wow&gt;")
+  },
+
+  "html-escapes the 'next' link title"() {
+    const html = view({nextTitle: "<wow>"})
+    expect(html, contains, "&lt;wow&gt;")
+  },
+
+  "html-escapes the 'hub' link title"() {
+    const html = view({hubTitle: "<wow>"})
+    expect(html, contains, "&lt;wow&gt;")
+  },
+})
+
+test("htmlEscape", {
+  "escapes special characters"() {
+    expect(htmlEscape(`<>&'"<>&'"`), is, "&lt;&gt;&amp;&#39;&quot;&lt;&gt;&amp;&#39;&quot;")
   },
 })
 
