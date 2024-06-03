@@ -7,7 +7,7 @@ import {getAllTests, runTests, formatTestResultsAsText} from "@benchristel/taste
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-glob(`${__dirname}/**/*.test.js`)
+glob(`${__dirname}/src/**/*.test.js`)
   .then((paths) => Promise.all(paths.map(path => import(path))))
   .then(() => runTests(getAllTests()))
   .then(formatTestResultsAsText)

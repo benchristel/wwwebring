@@ -1,5 +1,5 @@
 import {test, expect} from "@benchristel/taste"
-import {generateHtml} from "./html.js"
+import {generateHtml, view} from "./html.js"
 
 test("the webring html", {
   "points all links to the hub when there are no sites in the webring"() {
@@ -30,6 +30,23 @@ test("the webring html", {
   }
 })
 
+test("view", {
+  "url-encodes the 'previous' link href"() {
+    const html = view({prevUrl: "http://foo.com/a b"})
+    expect(html, contains, "http://foo.com/a%20b")
+  },
+
+  "url-encodes the 'next' link href"() {
+    const html = view({nextUrl: "http://foo.com/a b"})
+    expect(html, contains, "http://foo.com/a%20b")
+  },
+
+  "url-encodes the 'hub' link href"() {
+    const html = view({hubUrl: "http://foo.com/a b"})
+    expect(html, contains, "http://foo.com/a%20b")
+  },
+})
+
 function isDisregardingSpaces(rawExpected, rawActual) {
   if (typeof rawExpected !== "string") return false;
   if (typeof rawActual !== "string") return false;
@@ -42,4 +59,8 @@ function isDisregardingSpaces(rawExpected, rawActual) {
 
 function stripSpacesFromHTML(html) {
   return html.replace(/\s+/g, " ").replace(/ ?([<>]) ?/g, "$1")
+}
+
+function contains(expectedSubstring, s) {
+  return s.includes(expectedSubstring)
 }
