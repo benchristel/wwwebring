@@ -1,10 +1,10 @@
 {
-  "name": "@benchristel/narya",
+  "name": "wwwebring",
   "version": "0.0.0",
   "type": "module",
   "description": "A webring widget",
-  "main": "dist/narya.js",
-  "repository": "https://github.com/benchristel/narya",
+  "main": "dist/wwwebring.js",
+  "repository": "https://github.com/benchristel/wwwebring",
   "author": "Ben Christel",
   "license": "MIT",
   "private": false,
