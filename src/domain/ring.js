@@ -1,8 +1,3 @@
-
-export function model(config) {
-  return new Ring(config)
-}
-
 export class Ring {
   constructor(config, currentUrl) {
     this.config = config;
