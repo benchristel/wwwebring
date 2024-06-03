@@ -19,14 +19,17 @@ export function model(config) {
 export function view(model) {
   return `
     <div class="wwwebring-widget">
-      <div class="wwwebring-start">
-        <a href="${urlEscape(model.prevUrl)}">${htmlEscape(model.prevTitle)}</a>
-      </div>
-      <div class="wwwebring-middle">
+      <div class="wwwebring-hub">
         <a href="${urlEscape(model.hubUrl)}">${htmlEscape(model.hubTitle)}</a>
       </div>
-      <div class="wwwebring-end">
-        <a href="${urlEscape(model.nextUrl)}">${htmlEscape(model.nextTitle)}</a>
+      <div class="wwwebring-ring-links">
+        <span class="wwwebring-prev">
+          <a href="${urlEscape(model.prevUrl)}">${htmlEscape(model.prevTitle)}</a>
+        </span>
+        <span class="wwwebring-divider"></span>
+        <span class="wwwebring-next">
+          <a href="${urlEscape(model.nextUrl)}">${htmlEscape(model.nextTitle)}</a>
+        </span>
       </div>
     </div>
   `
