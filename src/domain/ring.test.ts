@@ -178,5 +178,10 @@ test("a ring with two members", {
   "does not find a nonexistent member"() {
     const ring = new Ring(twoMemberConfig)
     expect(ring.memberIndex("https://idontexist.com"), is, -1)
+  },
+
+  "finds a member by approximate URL"() {
+    const ring = new Ring(twoMemberConfig)
+    expect(ring.memberIndex("http://www.first.one/blah.html"), is, 0)
   }
 })

@@ -1,5 +1,5 @@
 import {test, expect, is} from "@benchristel/taste"
-import {urlEscape} from "./urls"
+import {parseUrlOrNull, urlEscape} from "./urls"
 
 test("urlEscape", {
   "escapes spaces"() {
@@ -17,4 +17,18 @@ test("urlEscape", {
   "does not touch existing escapes"() {
     expect(urlEscape('%20'), is, "%20")
   }
+})
+
+test("parseUrlOrNull", {
+  "is null given a string that can't possibly be a URL"() {
+    expect(parseUrlOrNull("/"), is, null)
+  },
+
+  "parses a well-formed URL"() {
+    expect(parseUrlOrNull("http://foo.com")?.hostname, is, "foo.com")
+  },
+
+  "tries its best when the protocol is missing"() {
+    expect(parseUrlOrNull("foo.com")?.hostname, is, "foo.com")
+  },
 })

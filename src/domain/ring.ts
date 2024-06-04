@@ -1,4 +1,5 @@
 import type {Config, MemberSite} from "./config";
+import {Scope} from "./scope";
 
 export class Ring {
   constructor(private config: Config) {}
@@ -30,7 +31,7 @@ export class Ring {
   // memberIndex returns -1 on not found
   memberIndex(url: string): number {
     return this.config.members.findIndex(({landingPage}) =>
-      landingPage === url
+      new Scope(landingPage).matches(url)
     )
   }
 }
