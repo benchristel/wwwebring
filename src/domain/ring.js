@@ -39,11 +39,11 @@ class Portal {
   }
 
   get hubUrl() {
-    return this.ring.hub().landingPage;
+    return this.hub().landingPage;
   }
 
   get hubTitle() {
-    return this.ring.hub().title;
+    return this.hub().title;
   }
 
   get nextUrl() {
@@ -52,6 +52,11 @@ class Portal {
 
   get nextTitle() {
     return this.next().title;
+  }
+
+  // private
+  hub() {
+    return this.ring.hub()
   }
 
   // private
