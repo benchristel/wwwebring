@@ -2,9 +2,15 @@ import {urlEscape} from "./lib/urls"
 import {htmlEscape} from "./lib/html"
 import {Ring, type Portal} from "./domain/ring"
 import type {Config} from "./domain/config"
+import {PortalLocation} from "./domain/portal-location"
 
-export function generateHtml(config: Config, currentUrl: string) {
-  return view(new Ring(config).portalAt(currentUrl))
+export function generateHtml(
+  config: Config,
+  currentUrl: string,
+  urlHint: null | string,
+) {
+  const location = new PortalLocation(currentUrl, urlHint)
+  return view(new Ring(config).portalAt(location))
 }
 
 export function view(portal: Portal) {

@@ -11,7 +11,7 @@ test("the webring html", {
       "members": []
     }
 
-    const html = generateHtml(config, "https://irrelevant.com")
+    const html = generateHtml(config, "https://irrelevant.com", null)
 
     expect(html, contains, `<a href="https://example.com">Test ring</a>`)
   }

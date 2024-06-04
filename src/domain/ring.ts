@@ -1,11 +1,12 @@
 import type {Config, MemberSite} from "./config";
-import {Scope} from "./scope";
+import type {PortalLocation} from "./portal-location";
+import type {Scope} from "./scope";
 
 export class Ring {
   constructor(private config: Config) {}
 
-  portalAt(url: string): Portal {
-    return new Portal(this, url);
+  portalAt(location: PortalLocation): Portal {
+    return new Portal(this, location);
   }
 
   hub(): MemberSite {
@@ -29,9 +30,9 @@ export class Ring {
   }
 
   // memberIndex returns -1 on not found
-  memberIndex(url: string): number {
+  memberIndex(location: PortalLocation): number {
     return this.config.members.findIndex(({landingPage}) =>
-      new Scope(landingPage).matches(url)
+      location.matches(landingPage)
     )
   }
 }
@@ -39,7 +40,7 @@ export class Ring {
 export class Portal {
   constructor(
     private ring: Ring,
-    private currentUrl: string,
+    private location: PortalLocation,
   ) {}
 
   get prevUrl(): string {
@@ -71,7 +72,7 @@ export class Portal {
   }
 
   private prev(): MemberSite {
-    const currentMemberIndex = this.ring.memberIndex(this.currentUrl)
+    const currentMemberIndex = this.ring.memberIndex(this.location)
     if (currentMemberIndex === -1) {
       return this.ring.memberAt(-1)
     }
@@ -79,7 +80,7 @@ export class Portal {
   }
 
   private next(): MemberSite {
-    const currentMemberIndex = this.ring.memberIndex(this.currentUrl)
+    const currentMemberIndex = this.ring.memberIndex(this.location)
     if (currentMemberIndex === -1) {
       return this.ring.memberAt(0)
     }

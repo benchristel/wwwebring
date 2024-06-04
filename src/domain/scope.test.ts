@@ -13,6 +13,18 @@ test("a scope given a malformed URL", {
   },
 })
 
+test("a scope given an empty string", {
+  "doesn't match any URL"() {
+    const scope = new Scope("")
+    expect(scope.matches("http://foo.com"), is, false)
+  },
+
+  "doesn't match empty string"() {
+    const scope = new Scope("")
+    expect(scope.matches(""), is, false)
+  }
+})
+
 test("a valid scope", {
   "matches an identical URL"() {
     const scope = new Scope("https://foo.com")
