@@ -10,24 +10,24 @@ const baseConfig = {
 
 test("a webring with no members", {
   "points the 'prev' link to the hub"() {
-    const ring = new Ring(baseConfig, "https://irrelevant.com")
+    const portal = new Ring(baseConfig).portalAt("https://irrelevant.com")
 
-    expect(ring.prevUrl, equals, "https://hub.com")
-    expect(ring.prevTitle, equals, "Test ring")
+    expect(portal.prevUrl, equals, "https://hub.com")
+    expect(portal.prevTitle, equals, "Test ring")
   },
 
   "points the 'next' link to the hub"() {
-    const ring = new Ring(baseConfig, "https://irrelevant.com")
+    const portal = new Ring(baseConfig).portalAt("https://irrelevant.com")
 
-    expect(ring.nextUrl, equals, "https://hub.com")
-    expect(ring.nextTitle, equals, "Test ring")
+    expect(portal.nextUrl, equals, "https://hub.com")
+    expect(portal.nextTitle, equals, "Test ring")
   },
 
   "points the 'hub' link to the hub"() {
-    const ring = new Ring(baseConfig, "https://irrelevant.com")
+    const portal = new Ring(baseConfig).portalAt("https://irrelevant.com")
 
-    expect(ring.hubUrl, equals, "https://hub.com")
-    expect(ring.hubTitle, equals, "Test ring")
+    expect(portal.hubUrl, equals, "https://hub.com")
+    expect(portal.hubTitle, equals, "Test ring")
   },
 })
 
@@ -44,30 +44,30 @@ const oneMemberConfig = {
 
 test("a ring with one member", {
   "points the 'prev' link on the hub page to that member"() {
-    const ring = new Ring(oneMemberConfig, "https://hub.com")
+    const portal = new Ring(oneMemberConfig).portalAt("https://hub.com")
 
-    expect(ring.prevUrl, equals, "https://first.one/dir/index.html")
-    expect(ring.prevTitle, equals, "First")
+    expect(portal.prevUrl, equals, "https://first.one/dir/index.html")
+    expect(portal.prevTitle, equals, "First")
   },
 
   "points the 'next' link on the hub page to that member"() {
-    const ring = new Ring(oneMemberConfig, "https://hub.com")
+    const portal = new Ring(oneMemberConfig).portalAt("https://hub.com")
 
-    expect(ring.nextUrl, equals, "https://first.one/dir/index.html")
-    expect(ring.nextTitle, equals, "First")
+    expect(portal.nextUrl, equals, "https://first.one/dir/index.html")
+    expect(portal.nextTitle, equals, "First")
   },
 
   "points the 'prev' link on the member page to itself"() {
-    const ring = new Ring(oneMemberConfig, "https://first.one/dir/index.html")
+    const portal = new Ring(oneMemberConfig).portalAt("https://first.one/dir/index.html")
 
-    expect(ring.prevUrl, equals, "https://first.one/dir/index.html")
-    expect(ring.prevTitle, equals, "First")
+    expect(portal.prevUrl, equals, "https://first.one/dir/index.html")
+    expect(portal.prevTitle, equals, "First")
   },
 
   "points the 'next' link on the member page to itself"() {
-    const ring = new Ring(oneMemberConfig, "https://first.one/dir/index.html")
+    const portal = new Ring(oneMemberConfig).portalAt("https://first.one/dir/index.html")
 
-    expect(ring.nextUrl, equals, "https://first.one/dir/index.html")
-    expect(ring.nextTitle, equals, "First")
+    expect(portal.nextUrl, equals, "https://first.one/dir/index.html")
+    expect(portal.nextTitle, equals, "First")
   },
 })

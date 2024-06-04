@@ -1,7 +1,13 @@
 export class Ring {
-  constructor(config, currentUrl) {
+  constructor(config) {
     this.config = config;
-    this.currentUrl = currentUrl;
+  }
+
+  portalAt(url) {
+    // TODO: this is a temporary hack. Extract a portal
+    // object so we aren't mutating Ring
+    this.currentUrl = url
+    return this;
   }
 
   get prevUrl() {
