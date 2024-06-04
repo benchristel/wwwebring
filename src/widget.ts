@@ -1,12 +1,13 @@
-import {urlEscape} from "./lib/urls.js"
-import {htmlEscape} from "./lib/html.js"
-import {Ring} from "./domain/ring.js"
+import {urlEscape} from "./lib/urls"
+import {htmlEscape} from "./lib/html"
+import {Ring, type Portal} from "./domain/ring"
+import type {Config} from "./domain/config"
 
-export function generateHtml(config, currentUrl) {
+export function generateHtml(config: Config, currentUrl: string) {
   return view(new Ring(config).portalAt(currentUrl))
 }
 
-export function view(portal) {
+export function view(portal: Portal) {
   return `
     <div class="wwwebring-widget">
       <div class="wwwebring-hub">

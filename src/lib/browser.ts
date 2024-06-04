@@ -1,4 +1,4 @@
-export function onDomContentLoaded(cb) {
+export function onDomContentLoaded(cb: () => unknown) {
   if (document.readyState !== "loading") {
     // already loaded; see https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState
     

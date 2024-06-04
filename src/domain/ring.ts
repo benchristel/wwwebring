@@ -1,13 +1,13 @@
-export class Ring {
-  constructor(config) {
-    this.config = config;
-  }
+import type {Config, MemberSite} from "./config";
 
-  portalAt(url) {
+export class Ring {
+  constructor(private config: Config) {}
+
+  portalAt(url: string): Portal {
     return new Portal(this, url);
   }
 
-  hub() {
+  hub(): MemberSite {
     return {
       landingPage: this.config.hub,
       scope: this.config.hub,
@@ -15,11 +15,11 @@ export class Ring {
     };
   }
 
-  numMembers() {
+  numMembers(): number {
     return this.config.members.length
   }
 
-  memberAt(offset) {
+  memberAt(offset: number): MemberSite {
     if (this.numMembers() === 0) {
       return this.hub()
     }
@@ -28,50 +28,49 @@ export class Ring {
     return this.config.members[index]
   }
 
-  memberIndex(url) {
+  // memberIndex returns -1 on not found
+  memberIndex(url: string): number {
     return this.config.members.findIndex(({landingPage}) =>
       landingPage === url
     )
   }
 }
 
-class Portal {
-  constructor(ring, currentUrl) {
-    this.ring = ring;
-    this.currentUrl = currentUrl
-  }
+export class Portal {
+  constructor(
+    private ring: Ring,
+    private currentUrl: string,
+  ) {}
 
-  get prevUrl() {
+  get prevUrl(): string {
     return this.prev().landingPage;
   }
 
-  get prevTitle() {
+  get prevTitle(): string {
     return this.prev().title;
   }
 
-  get hubUrl() {
+  get hubUrl(): string {
     return this.hub().landingPage;
   }
 
-  get hubTitle() {
+  get hubTitle(): string {
     return this.hub().title;
   }
 
-  get nextUrl() {
+  get nextUrl(): string {
     return this.next().landingPage;
   }
 
-  get nextTitle() {
+  get nextTitle(): string {
     return this.next().title;
   }
 
-  // private
-  hub() {
+  private hub(): MemberSite {
     return this.ring.hub()
   }
 
-  // private
-  prev() {
+  private prev(): MemberSite {
     const currentMemberIndex = this.ring.memberIndex(this.currentUrl)
     if (currentMemberIndex === -1) {
       return this.ring.memberAt(-1)
@@ -79,8 +78,7 @@ class Portal {
     return this.ring.memberAt(currentMemberIndex - 1)
   }
 
-  // private
-  next() {
+  private next(): MemberSite {
     const currentMemberIndex = this.ring.memberIndex(this.currentUrl)
     if (currentMemberIndex === -1) {
       return this.ring.memberAt(0)

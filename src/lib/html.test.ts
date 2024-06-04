@@ -1,5 +1,5 @@
 import {test, expect, is} from "@benchristel/taste"
-import {htmlEscape} from "./html.js"
+import {htmlEscape} from "./html"
 
 test("htmlEscape", {
   "escapes special characters"() {

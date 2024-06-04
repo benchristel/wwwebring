@@ -1,5 +1,5 @@
 import {test, expect, is, equals} from "@benchristel/taste"
-import {Ring} from "./ring.js"
+import {Ring} from "./ring"
 
 const baseConfig = {
   "name": "Test ring",

@@ -1,5 +1,5 @@
 import {test, expect, is} from "@benchristel/taste"
-import {urlEscape} from "./urls.js"
+import {urlEscape} from "./urls"
 
 test("urlEscape", {
   "escapes spaces"() {
