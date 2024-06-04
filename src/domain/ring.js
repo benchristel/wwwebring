@@ -30,7 +30,7 @@ export class Ring {
 
   // private
   prev() {
-    if (this.config.members.length > 0) {
+    if (this.config.members.length === 1) {
       return this.config.members[0]
     }
     return {
@@ -41,7 +41,7 @@ export class Ring {
 
   // private
   next() {
-    if (this.config.members.length > 0) {
+    if (this.config.members.length === 1) {
       return this.config.members[0]
     }
     return {

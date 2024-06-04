@@ -56,4 +56,18 @@ test("a ring with one member", {
     expect(ring.nextUrl, equals, "https://first.one/dir/index.html")
     expect(ring.nextTitle, equals, "First")
   },
+
+  "points the 'prev' link on the member page to itself"() {
+    const ring = new Ring(oneMemberConfig, "https://first.one/dir/index.html")
+
+    expect(ring.prevUrl, equals, "https://first.one/dir/index.html")
+    expect(ring.prevTitle, equals, "First")
+  },
+
+  "points the 'next' link on the member page to itself"() {
+    const ring = new Ring(oneMemberConfig, "https://first.one/dir/index.html")
+
+    expect(ring.nextUrl, equals, "https://first.one/dir/index.html")
+    expect(ring.nextTitle, equals, "First")
+  },
 })
