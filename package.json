@@ -18,7 +18,9 @@
     "vite": "^5.2.12"
   },
   "scripts": {
+    "dev": "yarn vite",
     "test": "./test.js",
-    "build": "yarn vite build && cp -r themes dist/themes"
+    "verify": "./test.js && yarn tsc",
+    "build": "yarn verify && yarn vite build && cp -r themes dist/themes"
   }
 }
