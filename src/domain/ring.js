@@ -39,11 +39,11 @@ class Portal {
   }
 
   get hubUrl() {
-    return this.config.hub;
+    return this.ring.hub().landingPage;
   }
 
   get hubTitle() {
-    return this.config.name;
+    return this.ring.hub().title;
   }
 
   get nextUrl() {
@@ -52,10 +52,6 @@ class Portal {
 
   get nextTitle() {
     return this.next().title;
-  }
-
-  get config() {
-    return this.ring.config
   }
 
   // private
