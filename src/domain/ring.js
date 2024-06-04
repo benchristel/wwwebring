@@ -5,17 +5,11 @@ export class Ring {
   }
 
   get prevUrl() {
-    if (this.config.members.length > 0) {
-      return this.config.members[0].landingPage
-    }
-    return this.config.hub;
+    return this.prev().landingPage;
   }
 
   get prevTitle() {
-    if (this.config.members.length > 0) {
-      return this.config.members[0].title
-    }
-    return this.config.name;
+    return this.prev().title;
   }
 
   get hubUrl() {
@@ -27,16 +21,32 @@ export class Ring {
   }
 
   get nextUrl() {
-    if (this.config.members.length > 0) {
-      return this.config.members[0].landingPage
-    }
-    return this.config.hub;
+    return this.next().landingPage;
   }
 
   get nextTitle() {
+    return this.next().title;
+  }
+
+  // private
+  prev() {
     if (this.config.members.length > 0) {
-      return this.config.members[0].title
+      return this.config.members[0]
     }
-    return this.config.name;
+    return {
+      landingPage: this.config.hub,
+      title: this.config.name,
+    };
+  }
+
+  // private
+  next() {
+    if (this.config.members.length > 0) {
+      return this.config.members[0]
+    }
+    return {
+      landingPage: this.config.hub,
+      title: this.config.name,
+    };
   }
 }
