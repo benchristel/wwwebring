@@ -17,6 +17,11 @@ export class Ring {
   numMembers() {
     return this.config.members.length
   }
+
+  memberAt(offset) {
+    const index = (offset + this.numMembers()) % this.numMembers()
+    return this.config.members[index]
+  }
 }
 
 class Portal {
@@ -56,7 +61,7 @@ class Portal {
   // private
   prev() {
     if (this.ring.numMembers() === 1) {
-      return this.config.members[0]
+      return this.ring.memberAt(0)
     }
     return this.ring.hub();
   }
@@ -64,7 +69,7 @@ class Portal {
   // private
   next() {
     if (this.ring.numMembers() === 1) {
-      return this.config.members[0]
+      return this.ring.memberAt(0)
     }
     return this.ring.hub();
   }
