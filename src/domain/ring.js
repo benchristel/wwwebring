@@ -19,8 +19,16 @@ export class Ring {
   }
 
   memberAt(offset) {
+    if (this.numMembers() === 0) {
+      return this.hub()
+    }
+
     const index = (offset + this.numMembers()) % this.numMembers()
     return this.config.members[index]
+  }
+
+  memberIndex(searchUrl) {
+    return this.config.members.findIndex(url => url === searchUrl)
   }
 }
 
@@ -61,17 +69,19 @@ class Portal {
 
   // private
   prev() {
-    if (this.ring.numMembers() === 1) {
-      return this.ring.memberAt(0)
+    const currentMemberIndex = this.ring.memberIndex(this.currentUrl)
+    if (this.currentMemberIndex == null) {
+      return this.ring.memberAt(-1)
     }
-    return this.ring.hub();
+    return this.ring.memberAt(currentMemberIndex - 1)
   }
 
   // private
   next() {
-    if (this.ring.numMembers() === 1) {
+    const currentMemberIndex = this.ring.memberIndex(this.currentUrl)
+    if (this.currentMemberIndex == null) {
       return this.ring.memberAt(0)
     }
-    return this.ring.hub();
+    return this.ring.memberAt(currentMemberIndex + 1)
   }
 }

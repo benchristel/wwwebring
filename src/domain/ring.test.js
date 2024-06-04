@@ -71,3 +71,35 @@ test("a ring with one member", {
     expect(portal.nextTitle, equals, "First")
   },
 })
+
+const twoMemberConfig = {
+  ...baseConfig,
+  members: [
+    {
+      title: "First",
+      landingPage: "https://first.one/dir/index.html",
+      scope: "https://first.one",
+    },
+    {
+      title: "Second",
+      landingPage: "https://second.one/dir/index.html",
+      scope: "https://second.one",
+    },
+  ]
+}
+
+test("a ring with two members", {
+  "points the 'prev' link on the hub page to the second member"() {
+    const ring = new Ring(twoMemberConfig).portalAt("https://hub.com")
+
+    expect(ring.prevUrl, equals, "https://second.one/dir/index.html")
+    expect(ring.prevTitle, equals, "Second")
+  },
+
+  "points the 'next' link on the hub page to the first member"() {
+    const ring = new Ring(twoMemberConfig).portalAt("https://hub.com")
+
+    expect(ring.nextUrl, equals, "https://first.one/dir/index.html")
+    expect(ring.nextTitle, equals, "First")
+  },
+})
