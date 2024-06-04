@@ -13,6 +13,10 @@ export class Ring {
       title: this.config.name,
     };
   }
+
+  numMembers() {
+    return this.config.members.length
+  }
 }
 
 class Portal {
@@ -51,7 +55,7 @@ class Portal {
 
   // private
   prev() {
-    if (this.config.members.length === 1) {
+    if (this.ring.numMembers() === 1) {
       return this.config.members[0]
     }
     return this.ring.hub();
@@ -59,7 +63,7 @@ class Portal {
 
   // private
   next() {
-    if (this.config.members.length === 1) {
+    if (this.ring.numMembers() === 1) {
       return this.config.members[0]
     }
     return this.ring.hub();
