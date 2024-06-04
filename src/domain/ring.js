@@ -5,10 +5,16 @@ export class Ring {
   }
 
   get prevUrl() {
+    if (this.config.members.length > 0) {
+      return this.config.members[0].landingPage
+    }
     return this.config.hub;
   }
 
   get prevTitle() {
+    if (this.config.members.length > 0) {
+      return this.config.members[0].title
+    }
     return this.config.name;
   }
 
@@ -21,10 +27,16 @@ export class Ring {
   }
 
   get nextUrl() {
+    if (this.config.members.length > 0) {
+      return this.config.members[0].landingPage
+    }
     return this.config.hub;
   }
 
   get nextTitle() {
+    if (this.config.members.length > 0) {
+      return this.config.members[0].title
+    }
     return this.config.name;
   }
 }
