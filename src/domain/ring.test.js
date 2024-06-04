@@ -1,4 +1,4 @@
-import {test, expect, equals} from "@benchristel/taste"
+import {test, expect, is, equals} from "@benchristel/taste"
 import {Ring} from "./ring.js"
 
 const baseConfig = {
@@ -29,6 +29,15 @@ test("a webring with no members", {
     expect(portal.hubUrl, equals, "https://hub.com")
     expect(portal.hubTitle, equals, "Test ring")
   },
+
+  "returns the hub page from memberAt"() {
+    const ring = new Ring(baseConfig)
+    expect(ring.memberAt(0), equals, {
+      landingPage: "https://hub.com",
+      scope: "https://hub.com",
+      title: "Test ring",
+    })
+  }
 })
 
 const oneMemberConfig = {
@@ -70,6 +79,33 @@ test("a ring with one member", {
     expect(portal.nextUrl, equals, "https://first.one/dir/index.html")
     expect(portal.nextTitle, equals, "First")
   },
+
+  "returns the lone member from memberAt(0)"() {
+    const ring = new Ring(oneMemberConfig)
+    expect(ring.memberAt(0), equals, {
+      landingPage: "https://first.one/dir/index.html",
+      title: "First",
+      scope: "https://first.one",
+    })
+  },
+
+  "returns the lone member from memberAt(1)"() {
+    const ring = new Ring(oneMemberConfig)
+    expect(ring.memberAt(1), equals, {
+      landingPage: "https://first.one/dir/index.html",
+      title: "First",
+      scope: "https://first.one",
+    })
+  },
+
+  "returns the lone member from memberAt(-1)"() {
+    const ring = new Ring(oneMemberConfig)
+    expect(ring.memberAt(-1), equals, {
+      landingPage: "https://first.one/dir/index.html",
+      title: "First",
+      scope: "https://first.one",
+    })
+  },
 })
 
 const twoMemberConfig = {
@@ -90,16 +126,64 @@ const twoMemberConfig = {
 
 test("a ring with two members", {
   "points the 'prev' link on the hub page to the second member"() {
-    const ring = new Ring(twoMemberConfig).portalAt("https://hub.com")
+    const portal = new Ring(twoMemberConfig)
+      .portalAt("https://hub.com")
 
-    expect(ring.prevUrl, equals, "https://second.one/dir/index.html")
-    expect(ring.prevTitle, equals, "Second")
+    expect(portal.prevUrl, equals, "https://second.one/dir/index.html")
+    expect(portal.prevTitle, equals, "Second")
   },
 
   "points the 'next' link on the hub page to the first member"() {
-    const ring = new Ring(twoMemberConfig).portalAt("https://hub.com")
+    const portal = new Ring(twoMemberConfig)
+      .portalAt("https://hub.com")
 
-    expect(ring.nextUrl, equals, "https://first.one/dir/index.html")
-    expect(ring.nextTitle, equals, "First")
+    expect(portal.nextUrl, equals, "https://first.one/dir/index.html")
+    expect(portal.nextTitle, equals, "First")
   },
+
+  "points the 'prev' link on the first member's page to the second member"() {
+    const portal = new Ring(twoMemberConfig)
+      .portalAt("https://first.one/dir/index.html")
+
+    expect(portal.prevUrl, equals, "https://second.one/dir/index.html")
+    expect(portal.prevTitle, equals, "Second")
+  },
+
+  "points the 'next' link on the first member's page to the second member"() {
+    const portal = new Ring(twoMemberConfig)
+      .portalAt("https://first.one/dir/index.html")
+
+    expect(portal.nextUrl, equals, "https://second.one/dir/index.html")
+    expect(portal.nextTitle, equals, "Second")
+  },
+
+  "returns the first member from memberAt(0)"() {
+    const ring = new Ring(twoMemberConfig)
+    expect(ring.memberAt(0).title, equals, "First")
+  },
+
+  "returns the second member from memberAt(1)"() {
+    const ring = new Ring(twoMemberConfig)
+    expect(ring.memberAt(1).title, equals, "Second")
+  },
+
+  "returns the first member from memberAt(2)"() {
+    const ring = new Ring(twoMemberConfig)
+    expect(ring.memberAt(2).title, equals, "First")
+  },
+
+  "returns the second member from memberAt(-1)"() {
+    const ring = new Ring(twoMemberConfig)
+    expect(ring.memberAt(-1).title, equals, "Second")
+  },
+
+  "finds the first member at index 1"() {
+    const ring = new Ring(twoMemberConfig)
+    expect(ring.memberIndex("https://first.one/dir/index.html"), is, 0)
+  },
+
+  "does not find a nonexistent member"() {
+    const ring = new Ring(twoMemberConfig)
+    expect(ring.memberIndex("https://idontexist.com"), is, -1)
+  }
 })

@@ -10,6 +10,7 @@ export class Ring {
   hub() {
     return {
       landingPage: this.config.hub,
+      scope: this.config.hub,
       title: this.config.name,
     };
   }
@@ -27,8 +28,10 @@ export class Ring {
     return this.config.members[index]
   }
 
-  memberIndex(searchUrl) {
-    return this.config.members.findIndex(url => url === searchUrl)
+  memberIndex(url) {
+    return this.config.members.findIndex(({landingPage}) =>
+      landingPage === url
+    )
   }
 }
 
@@ -70,7 +73,7 @@ class Portal {
   // private
   prev() {
     const currentMemberIndex = this.ring.memberIndex(this.currentUrl)
-    if (this.currentMemberIndex == null) {
+    if (currentMemberIndex === -1) {
       return this.ring.memberAt(-1)
     }
     return this.ring.memberAt(currentMemberIndex - 1)
@@ -79,7 +82,7 @@ class Portal {
   // private
   next() {
     const currentMemberIndex = this.ring.memberIndex(this.currentUrl)
-    if (this.currentMemberIndex == null) {
+    if (currentMemberIndex === -1) {
       return this.ring.memberAt(0)
     }
     return this.ring.memberAt(currentMemberIndex + 1)
