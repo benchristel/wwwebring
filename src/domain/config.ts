@@ -1,8 +1,6 @@
 export type Config = {
   // Human-readable name of the webring
   name: string;
-  // URL where the config file is canonically located
-  configLocation: string;
   // URL of the webring hub page
   hub: string;
   // Members of the webring

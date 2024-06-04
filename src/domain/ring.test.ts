@@ -4,7 +4,6 @@ import {PortalLocation} from "./portal-location"
 
 const baseConfig = {
   "name": "Test ring",
-  "configLocation": "https://hub.com/ring.json",
   "hub": "https://hub.com",
   "members": []
 }

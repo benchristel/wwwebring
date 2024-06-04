@@ -6,7 +6,6 @@ test("the webring html", {
   "generates even when there are no sites in the webring"() {
     const config = {
       "name": "Test ring",
-      "configLocation": "https://example.com/ring.json",
       "hub": "https://example.com",
       "members": []
     }
