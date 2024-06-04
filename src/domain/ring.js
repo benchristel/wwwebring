@@ -6,6 +6,13 @@ export class Ring {
   portalAt(url) {
     return new Portal(this, url);
   }
+
+  hub() {
+    return {
+      landingPage: this.config.hub,
+      title: this.config.name,
+    };
+  }
 }
 
 class Portal {
@@ -47,10 +54,7 @@ class Portal {
     if (this.config.members.length === 1) {
       return this.config.members[0]
     }
-    return {
-      landingPage: this.config.hub,
-      title: this.config.name,
-    };
+    return this.ring.hub();
   }
 
   // private
@@ -58,9 +62,6 @@ class Portal {
     if (this.config.members.length === 1) {
       return this.config.members[0]
     }
-    return {
-      landingPage: this.config.hub,
-      title: this.config.name,
-    };
+    return this.ring.hub();
   }
 }
