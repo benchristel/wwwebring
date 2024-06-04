@@ -34,7 +34,6 @@ test("a webring with no members", {
     const ring = new Ring(baseConfig)
     expect(ring.memberAt(0), equals, {
       landingPage: "https://hub.com",
-      scope: "https://hub.com",
       title: "Test ring",
     })
   }
@@ -46,7 +45,6 @@ const oneMemberConfig = {
     {
       title: "First",
       landingPage: "https://first.one/dir/index.html",
-      scope: "https://first.one",
     }
   ]
 }
@@ -85,7 +83,6 @@ test("a ring with one member", {
     expect(ring.memberAt(0), equals, {
       landingPage: "https://first.one/dir/index.html",
       title: "First",
-      scope: "https://first.one",
     })
   },
 
@@ -94,7 +91,6 @@ test("a ring with one member", {
     expect(ring.memberAt(1), equals, {
       landingPage: "https://first.one/dir/index.html",
       title: "First",
-      scope: "https://first.one",
     })
   },
 
@@ -103,7 +99,6 @@ test("a ring with one member", {
     expect(ring.memberAt(-1), equals, {
       landingPage: "https://first.one/dir/index.html",
       title: "First",
-      scope: "https://first.one",
     })
   },
 })
@@ -114,12 +109,10 @@ const twoMemberConfig = {
     {
       title: "First",
       landingPage: "https://first.one/dir/index.html",
-      scope: "https://first.one",
     },
     {
       title: "Second",
       landingPage: "https://second.one/dir/index.html",
-      scope: "https://second.one",
     },
   ]
 }

@@ -14,6 +14,4 @@ export type MemberSite = {
   title: string;
   // URL of the page that visitors will arrive on via webring links
   landingPage: string;
-  // TODO: remove scope
-  scope: string;
 }

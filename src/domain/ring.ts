@@ -10,7 +10,6 @@ export class Ring {
   hub(): MemberSite {
     return {
       landingPage: this.config.hub,
-      scope: this.config.hub,
       title: this.config.name,
     };
   }
