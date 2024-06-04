@@ -4,10 +4,14 @@ export class Ring {
   }
 
   portalAt(url) {
-    // TODO: this is a temporary hack. Extract a portal
-    // object so we aren't mutating Ring
-    this.currentUrl = url
-    return this;
+    return new Portal(this, url);
+  }
+}
+
+class Portal {
+  constructor(ring, currentUrl) {
+    this.ring = ring;
+    this.currentUrl = currentUrl
   }
 
   get prevUrl() {
@@ -32,6 +36,10 @@ export class Ring {
 
   get nextTitle() {
     return this.next().title;
+  }
+
+  get config() {
+    return this.ring.config
   }
 
   // private
