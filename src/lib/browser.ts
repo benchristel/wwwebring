@@ -9,3 +9,9 @@ export function onDomContentLoaded(cb: () => unknown) {
     document.addEventListener("DOMContentLoaded", cb);
   }
 }
+
+export function addCssToPage(css: string) {
+  const style = document.createElement("style");
+  document.head.appendChild(style);
+  style.innerText = css;
+}

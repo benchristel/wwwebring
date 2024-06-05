@@ -1,4 +1,7 @@
-.wwwebring-widget {
+export function generateCss(configUrl: string) {
+  const container = `[data-wwwebring="${configUrl}"]`
+  return `
+${container} .wwwebring-widget {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
@@ -9,7 +12,7 @@
   text-align: center;
 }
 
-.wwwebring-widget a {
+${container} .wwwebring-widget a {
   display: inline-block;
   padding: 0.75em;
   font-weight: bold;
@@ -17,41 +20,43 @@
   text-decoration: 1px underline #777;
 }
 
-.wwwebring-widget a:hover {
+${container} .wwwebring-widget a:hover {
   background: #fff5;
 }
 
-.wwwebring-ring-links {
+${container} .wwwebring-ring-links {
   display: flex;
   align-items: center;
 }
 
-.wwwebring-prev, .wwwebring-next {
+${container} .wwwebring-prev, .wwwebring-next {
   flex-basis: 10em;
   flex-grow: 1;
   display: flex;
   align-items: center;
 }
 
-.wwwebring-prev {
+${container} .wwwebring-prev {
   justify-content: flex-end;
 }
 
-.wwwebring-next {
+${container} .wwwebring-next {
   justify-content: flex-start;
 }
 
-.wwwebring-prev > a::before {
+${container} .wwwebring-prev > a::before {
   content: '<<';
   padding-inline-end: 1em;
 }
 
-.wwwebring-next > a::after {
+${container} .wwwebring-next > a::after {
   content: '>>';
   padding-inline-start: 1em;
 }
 
-.wwwebring-divider::before {
-  content: '\2766';
+${container} .wwwebring-divider::before {
+  content: '\\2766';
   padding-inline: 1em;
+}
+`
 }
