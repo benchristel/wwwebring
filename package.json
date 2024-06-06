@@ -22,7 +22,7 @@
     "ts": "yarn tsc --watch --noEmit",
     "test": "./test.js",
     "verify": "./test.js && yarn tsc",
-    "build": "yarn verify && yarn vite build && cp -r themes dist/themes",
+    "build": "yarn verify && yarn vite build",
     "preversion": "yarn build && git add dist"
   }
 }
