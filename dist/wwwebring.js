@@ -1,18 +1,84 @@
-function o(t) {
+function l(t) {
+  const e = `[data-wwwebring="${t}"]`;
+  return `
+${e} .wwwebring-widget {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  border: 2px outset #dcd;
+  background: #f6f0ff;
+  color: #000;
+  padding-block: 0.5em;
+  text-align: center;
+}
+
+${e} .wwwebring-widget a {
+  display: inline-block;
+  padding: 0.75em;
+  font-weight: bold;
+  color: inherit;
+  text-decoration: 1px underline #777;
+}
+
+${e} .wwwebring-widget a:hover {
+  background: #fff5;
+}
+
+${e} .wwwebring-ring-links {
+  display: flex;
+  align-items: center;
+}
+
+${e} .wwwebring-prev, .wwwebring-next {
+  flex-basis: 10em;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+${e} .wwwebring-prev {
+  justify-content: flex-end;
+}
+
+${e} .wwwebring-next {
+  justify-content: flex-start;
+}
+
+${e} .wwwebring-prev > a::before {
+  content: '<<';
+  padding-inline-end: 1em;
+}
+
+${e} .wwwebring-next > a::after {
+  content: '>>';
+  padding-inline-start: 1em;
+}
+
+${e} .wwwebring-divider::before {
+  content: '\\2766';
+  padding-inline: 1em;
+}
+`;
+}
+function c(t) {
   document.readyState !== "loading" ? setTimeout(t, 0) : document.addEventListener("DOMContentLoaded", t);
+}
+function u(t) {
+  const e = document.createElement("style");
+  document.head.appendChild(e), e.innerText = t;
 }
 function s(t) {
   return String(t).replace(/[ "<>]/g, (e) => "%" + e.charCodeAt(0).toString(16).toUpperCase());
 }
-function c(t) {
-  u(t) || (t = "https://" + t);
+function g(t) {
+  w(t) || (t = "https://" + t);
   try {
     return new URL(t);
   } catch {
     return null;
   }
 }
-function u(t) {
+function w(t) {
   return /^[a-z]+:\/\//.test(t);
 }
 function a(t) {
@@ -23,7 +89,7 @@ class h {
     this.config = e;
   }
   portalAt(e) {
-    return new g(this, e);
+    return new d(this, e);
   }
   hub() {
     return {
@@ -37,19 +103,19 @@ class h {
   memberAt(e) {
     if (this.numMembers() === 0)
       return this.hub();
-    const r = (e + this.numMembers()) % this.numMembers();
-    return this.config.members[r];
+    const n = (e + this.numMembers()) % this.numMembers();
+    return this.config.members[n];
   }
   // memberIndex returns -1 on not found
   memberIndex(e) {
     return this.config.members.findIndex(
-      ({ landingPage: r }) => e.matches(r)
+      ({ landingPage: n }) => e.matches(n)
     );
   }
 }
-class g {
-  constructor(e, r) {
-    this.ring = e, this.location = r;
+class d {
+  constructor(e, n) {
+    this.ring = e, this.location = n;
   }
   get prevUrl() {
     return this.prev().landingPage;
@@ -81,15 +147,15 @@ class g {
     return e === -1 ? this.ring.memberAt(0) : this.ring.memberAt(e + 1);
   }
 }
-class m {
+class b {
   constructor(e) {
     this.rawUrl = e;
   }
   matches(e) {
     if (this.url == null)
       return !1;
-    const r = c(e);
-    return r == null ? !1 : l(this.url) === l(r);
+    const n = g(e);
+    return n == null ? !1 : o(this.url) === o(n);
   }
   get url() {
     try {
@@ -99,28 +165,28 @@ class m {
     }
   }
 }
-function l(t) {
+function o(t) {
   return t.hostname.replace(/^www\./, "");
 }
-class w {
-  constructor(e, r) {
-    this.realUrl = e, this.hint = r;
+class m {
+  constructor(e, n) {
+    this.realUrl = e, this.hint = n;
   }
   matches(e) {
-    return this.scopes.some((r) => r.matches(e));
+    return this.scopes.some((n) => n.matches(e));
   }
   get scopes() {
-    return [this.realUrl, this.hint].filter(b).map((e) => new m(e));
+    return [this.realUrl, this.hint].filter(f).map((e) => new b(e));
   }
 }
-function b(t) {
+function f(t) {
   return t != null;
 }
-function d(t, e, r) {
-  const i = new w(e, r);
-  return f(new h(t).portalAt(i));
+function p(t, e, n) {
+  const i = new m(e, n);
+  return x(new h(t).portalAt(i));
 }
-function f(t) {
+function x(t) {
   return `
     <div class="wwwebring-widget">
       <div class="wwwebring-hub">
@@ -138,14 +204,18 @@ function f(t) {
     </div>
   `;
 }
-o(() => {
+c(() => {
   const t = [...document.querySelectorAll("[data-wwwebring]")];
   for (const e of t) {
-    const r = e.getAttribute("data-wwwebring-you-are-here"), i = e.getAttribute("data-wwwebring");
+    const n = e.getAttribute("data-wwwebring-you-are-here"), i = e.getAttribute("data-wwwebring");
     if (!i) {
       console.error("data-wwwebring attribute was empty; it should be a URL");
       continue;
     }
-    fetch(i).then((n) => n.json()).then((n) => d(n, window.location.href, r)).then((n) => e.innerHTML = n).catch((n) => console.error("Failed to fetch webring config for URL " + i, n.message));
+    switch (fetch(i).then((r) => r.json()).then((r) => p(r, window.location.href, n)).then((r) => e.innerHTML = r).catch((r) => console.error("Failed to fetch webring config for URL " + i, r.message)), e.getAttribute("data-wwwebring-theme")) {
+      case "default":
+        u(l(i));
+        break;
+    }
   }
 });
