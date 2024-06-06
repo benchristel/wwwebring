@@ -19,6 +19,7 @@
   },
   "scripts": {
     "dev": "yarn vite",
+    "ts": "yarn tsc --watch --noEmit",
     "test": "./test.js",
     "verify": "./test.js && yarn tsc",
     "build": "yarn verify && yarn vite build && cp -r themes dist/themes",
