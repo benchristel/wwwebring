@@ -5,9 +5,9 @@ ${container} .wwwebring-widget {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  border: 2px outset #dcd;
-  background: #f6f0ff;
-  color: #000;
+  border: var(--wwwebring-border, 2px outset #fff);
+  background: var(--wwwebring-background, #eee);
+  color: var(--wwwebring-text-color, #000);
   padding-block: 0.5em;
   text-align: center;
 }
@@ -17,11 +17,6 @@ ${container} .wwwebring-widget a {
   padding: 0.75em;
   font-weight: bold;
   color: inherit;
-  text-decoration: 1px underline #777;
-}
-
-${container} .wwwebring-widget a:hover {
-  background: #fff5;
 }
 
 ${container} .wwwebring-ring-links {

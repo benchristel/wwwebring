@@ -5,7 +5,8 @@
   "files": [
     "dist"
   ],
-  "description": "A webring widget",
+  "keywords": ["webring", "browser", "static"],
+  "description": "A fully-clientside webring library for static sites",
   "main": "dist/wwwebring.js",
   "repository": "https://github.com/benchristel/wwwebring",
   "author": "Ben Christel",
