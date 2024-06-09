@@ -1,15 +1,10 @@
-export type Config = {
-  // Human-readable name of the webring
-  name: string;
-  // URL of the webring hub page
-  hub: string;
-  // Members of the webring
-  members: MemberSite[]
+export interface Config extends Linkable {
+  members: Linkable[]
 }
 
-export type MemberSite = {
+export interface Linkable {
   // Name of the website
-  title: string;
+  name: string;
   // URL of the page that visitors will arrive on via webring links
-  landingPage: string;
+  url: string;
 }

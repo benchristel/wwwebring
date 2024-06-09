@@ -1,10 +1,11 @@
 import {test, expect, is, equals} from "@benchristel/taste"
 import {Ring} from "./ring"
 import {PortalLocation} from "./portal-location"
+import type {Config} from "./config"
 
-const baseConfig = {
+const baseConfig: Config = {
   "name": "Test ring",
-  "hub": "https://hub.com",
+  "url": "https://hub.com",
   "members": []
 }
 
@@ -35,19 +36,17 @@ test("a webring with no members", {
 
   "returns the hub page from memberAt"() {
     const ring = new Ring(baseConfig)
-    expect(ring.memberAt(0), equals, {
-      landingPage: "https://hub.com",
-      title: "Test ring",
-    })
+    expect(ring.memberAt(0).name, equals, "Test ring")
+    expect(ring.memberAt(0).url, equals, "https://hub.com")
   }
 })
 
-const oneMemberConfig = {
+const oneMemberConfig: Config = {
   ...baseConfig,
   members: [
     {
-      title: "First",
-      landingPage: "https://first.one/dir/index.html",
+      name: "First",
+      url: "https://first.one/dir/index.html",
     }
   ]
 }
@@ -88,38 +87,38 @@ test("a ring with one member", {
   "returns the lone member from memberAt(0)"() {
     const ring = new Ring(oneMemberConfig)
     expect(ring.memberAt(0), equals, {
-      landingPage: "https://first.one/dir/index.html",
-      title: "First",
+      name: "First",
+      url: "https://first.one/dir/index.html",
     })
   },
 
   "returns the lone member from memberAt(1)"() {
     const ring = new Ring(oneMemberConfig)
     expect(ring.memberAt(1), equals, {
-      landingPage: "https://first.one/dir/index.html",
-      title: "First",
+      name: "First",
+      url: "https://first.one/dir/index.html",
     })
   },
 
   "returns the lone member from memberAt(-1)"() {
     const ring = new Ring(oneMemberConfig)
     expect(ring.memberAt(-1), equals, {
-      landingPage: "https://first.one/dir/index.html",
-      title: "First",
+      name: "First",
+      url: "https://first.one/dir/index.html",
     })
   },
 })
 
-const twoMemberConfig = {
+const twoMemberConfig: Config = {
   ...baseConfig,
   members: [
     {
-      title: "First",
-      landingPage: "https://first.one/dir/index.html",
+      name: "First",
+      url: "https://first.one/dir/index.html",
     },
     {
-      title: "Second",
-      landingPage: "https://second.one/dir/index.html",
+      name: "Second",
+      url: "https://second.one/dir/index.html",
     },
   ]
 }
@@ -159,22 +158,22 @@ test("a ring with two members", {
 
   "returns the first member from memberAt(0)"() {
     const ring = new Ring(twoMemberConfig)
-    expect(ring.memberAt(0).title, equals, "First")
+    expect(ring.memberAt(0).name, equals, "First")
   },
 
   "returns the second member from memberAt(1)"() {
     const ring = new Ring(twoMemberConfig)
-    expect(ring.memberAt(1).title, equals, "Second")
+    expect(ring.memberAt(1).name, equals, "Second")
   },
 
   "returns the first member from memberAt(2)"() {
     const ring = new Ring(twoMemberConfig)
-    expect(ring.memberAt(2).title, equals, "First")
+    expect(ring.memberAt(2).name, equals, "First")
   },
 
   "returns the second member from memberAt(-1)"() {
     const ring = new Ring(twoMemberConfig)
-    expect(ring.memberAt(-1).title, equals, "Second")
+    expect(ring.memberAt(-1).name, equals, "Second")
   },
 
   "finds the first member at index 1"() {

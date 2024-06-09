@@ -1,12 +1,13 @@
 import {test, expect} from "@benchristel/taste"
 import {contains} from "./lib/testing"
 import {generateHtml, view} from "./widget"
+import type {Config} from "./domain/config"
 
 test("the webring html", {
   "generates even when there are no sites in the webring"() {
-    const config = {
+    const config: Config = {
       "name": "Test ring",
-      "hub": "https://example.com",
+      "url": "https://example.com",
       "members": []
     }
 

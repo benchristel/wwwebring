@@ -11,7 +11,7 @@ Read this section if you want to join a webring maintained by someone else.
 Add this HTML to your page where you want the webring widget to appear. Replace the value of `data-wwwebring` with the URL the webring maintainer gives you.
 
 ```html
-<script defer src="https://cdn.jsdelivr.net/npm/wwwebring@0.0.3"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/wwwebring@0.1.0"></script>
 <div
   data-wwwebring="https://waywardweb.org/ring.json"
   data-wwwebring-theme="default"
@@ -65,15 +65,15 @@ Webrings are configured via a JSON file that lists the members of the webring an
 ```json
 {
   "name": "The Wayward Webring",
-  "hub": "https://waywardweb.org",
+  "url": "https://waywardweb.org",
   "members": [
     {
-      "title": "Ben's Site",
-      "landingPage": "https://ben.waywardweb.org"
+      "name": "Ben's Site",
+      "url": "https://ben.waywardweb.org"
     },
     {
-      "title": "Bastion",
-      "landingPage": "https://bastionhome.github.io"
+      "name": "Bastion",
+      "url": "https://bastionhome.github.io"
     }
   ]
 }

@@ -1,4 +1,4 @@
-import type {Config, MemberSite} from "./config";
+import type {Config, Linkable} from "./config";
 import type {PortalLocation} from "./portal-location";
 import type {Scope} from "./scope";
 
@@ -9,18 +9,15 @@ export class Ring {
     return new Portal(this, location);
   }
 
-  hub(): MemberSite {
-    return {
-      landingPage: this.config.hub,
-      title: this.config.name,
-    };
+  hub(): Linkable {
+    return this.config;
   }
 
   numMembers(): number {
     return this.config.members.length
   }
 
-  memberAt(offset: number): MemberSite {
+  memberAt(offset: number): Linkable {
     if (this.numMembers() === 0) {
       return this.hub()
     }
@@ -31,8 +28,8 @@ export class Ring {
 
   // memberIndex returns -1 on not found
   memberIndex(location: PortalLocation): number {
-    return this.config.members.findIndex(({landingPage}) =>
-      location.matches(landingPage)
+    return this.config.members.findIndex(({url}) =>
+      location.matches(url)
     )
   }
 }
@@ -44,34 +41,34 @@ export class Portal {
   ) {}
 
   get prevUrl(): string {
-    return this.prev().landingPage;
+    return this.prev().url;
   }
 
   get prevTitle(): string {
-    return this.prev().title;
+    return this.prev().name;
   }
 
   get hubUrl(): string {
-    return this.hub().landingPage;
+    return this.hub().url;
   }
 
   get hubTitle(): string {
-    return this.hub().title;
+    return this.hub().name;
   }
 
   get nextUrl(): string {
-    return this.next().landingPage;
+    return this.next().url;
   }
 
   get nextTitle(): string {
-    return this.next().title;
+    return this.next().name;
   }
 
-  private hub(): MemberSite {
+  private hub(): Linkable {
     return this.ring.hub()
   }
 
-  private prev(): MemberSite {
+  private prev(): Linkable {
     const currentMemberIndex = this.ring.memberIndex(this.location)
     if (currentMemberIndex === -1) {
       return this.ring.memberAt(-1)
@@ -79,7 +76,7 @@ export class Portal {
     return this.ring.memberAt(currentMemberIndex - 1)
   }
 
-  private next(): MemberSite {
+  private next(): Linkable {
     const currentMemberIndex = this.ring.memberIndex(this.location)
     if (currentMemberIndex === -1) {
       return this.ring.memberAt(0)

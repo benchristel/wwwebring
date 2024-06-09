@@ -1,0 +1,14 @@
+{
+  "name": "The Wayward Webring",
+  "url": "https://waywardweb.org",
+  "members": [
+    {
+      "name": "Ben's Site",
+      "url": "https://ben.waywardweb.org"
+    },
+    {
+      "name": "Bastion",
+      "url": "https://bastionhome.github.io"
+    }
+  ]
+}
