@@ -87,10 +87,7 @@ class h {
     return new d(this, e);
   }
   hub() {
-    return {
-      landingPage: this.config.hub,
-      title: this.config.name
-    };
+    return this.config;
   }
   numMembers() {
     return this.config.members.length;
@@ -104,7 +101,7 @@ class h {
   // memberIndex returns -1 on not found
   memberIndex(e) {
     return this.config.members.findIndex(
-      ({ landingPage: n }) => e.matches(n)
+      ({ url: n }) => e.matches(n)
     );
   }
 }
@@ -113,22 +110,22 @@ class d {
     this.ring = e, this.location = n;
   }
   get prevUrl() {
-    return this.prev().landingPage;
+    return this.prev().url;
   }
   get prevTitle() {
-    return this.prev().title;
+    return this.prev().name;
   }
   get hubUrl() {
-    return this.hub().landingPage;
+    return this.hub().url;
   }
   get hubTitle() {
-    return this.hub().title;
+    return this.hub().name;
   }
   get nextUrl() {
-    return this.next().landingPage;
+    return this.next().url;
   }
   get nextTitle() {
-    return this.next().title;
+    return this.next().name;
   }
   hub() {
     return this.ring.hub();
