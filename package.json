@@ -1,11 +1,15 @@
 {
   "name": "wwwebring",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "files": [
     "dist"
   ],
-  "keywords": ["webring", "browser", "static"],
+  "keywords": [
+    "webring",
+    "browser",
+    "static"
+  ],
   "description": "A fully-clientside webring library for static sites",
   "main": "dist/wwwebring.js",
   "repository": "https://github.com/benchristel/wwwebring",

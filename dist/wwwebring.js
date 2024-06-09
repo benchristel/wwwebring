@@ -5,9 +5,9 @@ ${e} .wwwebring-widget {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  border: 2px outset #dcd;
-  background: #f6f0ff;
-  color: #000;
+  border: var(--wwwebring-border, 2px outset #fff);
+  background: var(--wwwebring-background, #eee);
+  color: var(--wwwebring-text-color, #000);
   padding-block: 0.5em;
   text-align: center;
 }
@@ -17,11 +17,6 @@ ${e} .wwwebring-widget a {
   padding: 0.75em;
   font-weight: bold;
   color: inherit;
-  text-decoration: 1px underline #777;
-}
-
-${e} .wwwebring-widget a:hover {
-  background: #fff5;
 }
 
 ${e} .wwwebring-ring-links {
@@ -70,15 +65,15 @@ function u(t) {
 function s(t) {
   return String(t).replace(/[ "<>]/g, (e) => "%" + e.charCodeAt(0).toString(16).toUpperCase());
 }
-function g(t) {
-  w(t) || (t = "https://" + t);
+function w(t) {
+  g(t) || (t = "https://" + t);
   try {
     return new URL(t);
   } catch {
     return null;
   }
 }
-function w(t) {
+function g(t) {
   return /^[a-z]+:\/\//.test(t);
 }
 function a(t) {
@@ -154,7 +149,7 @@ class b {
   matches(e) {
     if (this.url == null)
       return !1;
-    const n = g(e);
+    const n = w(e);
     return n == null ? !1 : o(this.url) === o(n);
   }
   get url() {
