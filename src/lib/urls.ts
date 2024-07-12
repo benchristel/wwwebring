@@ -1,5 +1,5 @@
-export function sanitizeUrl(s: string): string {
-  return String(s)
+export function sanitizeUrl(s: string | null | undefined): string {
+  return (s ?? "")
     .replace(/[ "<>]/g, c => "%" + c.charCodeAt(0).toString(16).toUpperCase())
 }
 

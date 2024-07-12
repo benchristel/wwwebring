@@ -16,7 +16,15 @@ test("sanitizeUrl", {
 
   "does not touch existing escapes"() {
     expect(sanitizeUrl('%20'), is, "%20")
-  }
+  },
+
+  "defaults undefined to empty string"() {
+    expect(sanitizeUrl(undefined), is, "")
+  },
+
+  "defaults null to empty string"() {
+    expect(sanitizeUrl(null), is, "")
+  },
 })
 
 test("parseUrlOrNull", {
