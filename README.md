@@ -11,7 +11,7 @@ Read this section if you want to join a webring maintained by someone else.
 Add this HTML to your page where you want the webring widget to appear. Replace the value of `data-wwwebring` with the URL the webring maintainer gives you.
 
 ```html
-<script defer src="https://cdn.jsdelivr.net/npm/wwwebring@0.1.0"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/wwwebring@0.2.0"></script>
 <div
   data-wwwebring="https://waywardweb.org/ring.json"
   data-wwwebring-theme="default"
