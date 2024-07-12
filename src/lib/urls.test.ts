@@ -1,21 +1,21 @@
 import {test, expect, is} from "@benchristel/taste"
-import {parseUrlOrNull, urlEscape} from "./urls"
+import {parseUrlOrNull, sanitizeUrl} from "./urls"
 
-test("urlEscape", {
+test("sanitizeUrl", {
   "escapes spaces"() {
-    expect(urlEscape(" "), is, "%20")
+    expect(sanitizeUrl(" "), is, "%20")
   },
 
   "escapes quotes"() {
-    expect(urlEscape('"'), is, "%22")
+    expect(sanitizeUrl('"'), is, "%22")
   },
 
   "escapes angle brackets"() {
-    expect(urlEscape('<>'), is, "%3C%3E")
+    expect(sanitizeUrl('<>'), is, "%3C%3E")
   },
 
   "does not touch existing escapes"() {
-    expect(urlEscape('%20'), is, "%20")
+    expect(sanitizeUrl('%20'), is, "%20")
   }
 })
 
