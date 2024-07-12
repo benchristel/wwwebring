@@ -1,6 +1,9 @@
 export function sanitizeUrl(s: string | null | undefined): string {
-  return (s ?? "")
-    .replace(/[ "<>]/g, c => "%" + c.charCodeAt(0).toString(16).toUpperCase())
+  if (!s?.match(/https?:\/\//)) {
+    return "#"
+  }
+  return s.replace(/[ "<>]/g, c =>
+    "%" + c.charCodeAt(0).toString(16).toUpperCase())
 }
 
 export function parseUrlOrNull(url: string): URL | null {

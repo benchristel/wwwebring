@@ -3,27 +3,31 @@ import {parseUrlOrNull, sanitizeUrl} from "./urls"
 
 test("sanitizeUrl", {
   "escapes spaces"() {
-    expect(sanitizeUrl(" "), is, "%20")
+    expect(sanitizeUrl("https://example.com/ "), is, "https://example.com/%20")
   },
 
   "escapes quotes"() {
-    expect(sanitizeUrl('"'), is, "%22")
+    expect(sanitizeUrl('https://example.com/"'), is, "https://example.com/%22")
   },
 
   "escapes angle brackets"() {
-    expect(sanitizeUrl('<>'), is, "%3C%3E")
+    expect(sanitizeUrl('https://example.com/<>'), is, "https://example.com/%3C%3E")
   },
 
   "does not touch existing escapes"() {
-    expect(sanitizeUrl('%20'), is, "%20")
+    expect(sanitizeUrl('https://example.com/%20'), is, "https://example.com/%20")
   },
 
-  "defaults undefined to empty string"() {
-    expect(sanitizeUrl(undefined), is, "")
+  "defaults undefined to #"() {
+    expect(sanitizeUrl(undefined), is, "#")
   },
 
-  "defaults null to empty string"() {
-    expect(sanitizeUrl(null), is, "")
+  "defaults null to #"() {
+    expect(sanitizeUrl(null), is, "#")
+  },
+
+  "replaces non-HTTP urls with #"() {
+    expect(sanitizeUrl("javascript:alert('hacked')"), is, "#")
   },
 })
 
