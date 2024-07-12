@@ -5,8 +5,8 @@ ${container} .wwwebring-widget {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  border: var(--wwwebring-border, 2px outset #fff);
-  background: var(--wwwebring-background, #eee);
+  border: var(--wwwebring-border, none);
+  background: var(--wwwebring-background, transparent);
   color: var(--wwwebring-text-color, #000);
   padding-block: 0.5em;
   text-align: center;
@@ -22,10 +22,10 @@ ${container} .wwwebring-widget a {
 ${container} .wwwebring-ring-links {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 ${container} .wwwebring-prev, .wwwebring-next {
-  flex-basis: 10em;
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -49,9 +49,8 @@ ${container} .wwwebring-next > a::after {
   padding-inline-start: 1em;
 }
 
-${container} .wwwebring-divider::before {
-  content: '\\2766';
-  padding-inline: 1em;
+${container} .wwwebring-divider {
+  padding-inline: 0.5em;
 }
 `
 }
