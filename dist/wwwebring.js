@@ -1,12 +1,12 @@
-function l(t) {
+function c(t) {
   const e = `[data-wwwebring="${t}"]`;
   return `
 ${e} .wwwebring-widget {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  border: var(--wwwebring-border, 2px outset #fff);
-  background: var(--wwwebring-background, #eee);
+  border: var(--wwwebring-border, none);
+  background: var(--wwwebring-background, transparent);
   color: var(--wwwebring-text-color, #000);
   padding-block: 0.5em;
   text-align: center;
@@ -22,10 +22,10 @@ ${e} .wwwebring-widget a {
 ${e} .wwwebring-ring-links {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 ${e} .wwwebring-prev, .wwwebring-next {
-  flex-basis: 10em;
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -49,13 +49,12 @@ ${e} .wwwebring-next > a::after {
   padding-inline-start: 1em;
 }
 
-${e} .wwwebring-divider::before {
-  content: '\\2766';
-  padding-inline: 1em;
+${e} .wwwebring-divider {
+  padding-inline: 0.5em;
 }
 `;
 }
-function c(t) {
+function l(t) {
   document.readyState !== "loading" ? setTimeout(t, 0) : document.addEventListener("DOMContentLoaded", t);
 }
 function u(t) {
@@ -63,7 +62,7 @@ function u(t) {
   document.head.appendChild(e), e.innerText = t;
 }
 function s(t) {
-  return String(t).replace(/[ "<>]/g, (e) => "%" + e.charCodeAt(0).toString(16).toUpperCase());
+  return t != null && t.match(/https?:\/\//) ? t.replace(/[ "<>]/g, (e) => "%" + e.charCodeAt(0).toString(16).toUpperCase()) : "#";
 }
 function w(t) {
   g(t) || (t = "https://" + t);
@@ -196,7 +195,7 @@ function x(t) {
     </div>
   `;
 }
-c(() => {
+l(() => {
   const t = [...document.querySelectorAll("[data-wwwebring]")];
   for (const e of t) {
     const n = e.getAttribute("data-wwwebring-you-are-here"), i = e.getAttribute("data-wwwebring");
@@ -206,7 +205,7 @@ c(() => {
     }
     switch (fetch(i).then((r) => r.json()).then((r) => p(r, window.location.href, n)).then((r) => e.innerHTML = r).catch((r) => console.error("Failed to fetch webring config for URL " + i, r.message)), e.getAttribute("data-wwwebring-theme")) {
       case "default":
-        u(l(i));
+        u(c(i));
         break;
     }
   }

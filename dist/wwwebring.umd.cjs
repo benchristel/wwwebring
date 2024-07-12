@@ -3,8 +3,8 @@ ${e} .wwwebring-widget {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  border: var(--wwwebring-border, 2px outset #fff);
-  background: var(--wwwebring-background, #eee);
+  border: var(--wwwebring-border, none);
+  background: var(--wwwebring-background, transparent);
   color: var(--wwwebring-text-color, #000);
   padding-block: 0.5em;
   text-align: center;
@@ -20,10 +20,10 @@ ${e} .wwwebring-widget a {
 ${e} .wwwebring-ring-links {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 ${e} .wwwebring-prev, .wwwebring-next {
-  flex-basis: 10em;
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -47,22 +47,21 @@ ${e} .wwwebring-next > a::after {
   padding-inline-start: 1em;
 }
 
-${e} .wwwebring-divider::before {
-  content: '\\2766';
-  padding-inline: 1em;
+${e} .wwwebring-divider {
+  padding-inline: 0.5em;
 }
-`}function l(t){document.readyState!=="loading"?setTimeout(t,0):document.addEventListener("DOMContentLoaded",t)}function u(t){const e=document.createElement("style");document.head.appendChild(e),e.innerText=t}function o(t){return String(t).replace(/[ "<>]/g,e=>"%"+e.charCodeAt(0).toString(16).toUpperCase())}function w(t){g(t)||(t="https://"+t);try{return new URL(t)}catch{return null}}function g(t){return/^[a-z]+:\/\//.test(t)}function a(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}class h{constructor(e){this.config=e}portalAt(e){return new d(this,e)}hub(){return this.config}numMembers(){return this.config.members.length}memberAt(e){if(this.numMembers()===0)return this.hub();const n=(e+this.numMembers())%this.numMembers();return this.config.members[n]}memberIndex(e){return this.config.members.findIndex(({url:n})=>e.matches(n))}}class d{constructor(e,n){this.ring=e,this.location=n}get prevUrl(){return this.prev().url}get prevTitle(){return this.prev().name}get hubUrl(){return this.hub().url}get hubTitle(){return this.hub().name}get nextUrl(){return this.next().url}get nextTitle(){return this.next().name}hub(){return this.ring.hub()}prev(){const e=this.ring.memberIndex(this.location);return e===-1?this.ring.memberAt(-1):this.ring.memberAt(e-1)}next(){const e=this.ring.memberIndex(this.location);return e===-1?this.ring.memberAt(0):this.ring.memberAt(e+1)}}class b{constructor(e){this.rawUrl=e}matches(e){if(this.url==null)return!1;const n=w(e);return n==null?!1:c(this.url)===c(n)}get url(){try{return this._url??(this._url=new URL(this.rawUrl))}catch{return null}}}function c(t){return t.hostname.replace(/^www\./,"")}class m{constructor(e,n){this.realUrl=e,this.hint=n}matches(e){return this.scopes.some(n=>n.matches(e))}get scopes(){return[this.realUrl,this.hint].filter(f).map(e=>new b(e))}}function f(t){return t!=null}function p(t,e,n){const i=new m(e,n);return x(new h(t).portalAt(i))}function x(t){return`
+`}function l(t){document.readyState!=="loading"?setTimeout(t,0):document.addEventListener("DOMContentLoaded",t)}function u(t){const e=document.createElement("style");document.head.appendChild(e),e.innerText=t}function a(t){return t!=null&&t.match(/https?:\/\//)?t.replace(/[ "<>]/g,e=>"%"+e.charCodeAt(0).toString(16).toUpperCase()):"#"}function w(t){g(t)||(t="https://"+t);try{return new URL(t)}catch{return null}}function g(t){return/^[a-z]+:\/\//.test(t)}function o(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}class h{constructor(e){this.config=e}portalAt(e){return new d(this,e)}hub(){return this.config}numMembers(){return this.config.members.length}memberAt(e){if(this.numMembers()===0)return this.hub();const n=(e+this.numMembers())%this.numMembers();return this.config.members[n]}memberIndex(e){return this.config.members.findIndex(({url:n})=>e.matches(n))}}class d{constructor(e,n){this.ring=e,this.location=n}get prevUrl(){return this.prev().url}get prevTitle(){return this.prev().name}get hubUrl(){return this.hub().url}get hubTitle(){return this.hub().name}get nextUrl(){return this.next().url}get nextTitle(){return this.next().name}hub(){return this.ring.hub()}prev(){const e=this.ring.memberIndex(this.location);return e===-1?this.ring.memberAt(-1):this.ring.memberAt(e-1)}next(){const e=this.ring.memberIndex(this.location);return e===-1?this.ring.memberAt(0):this.ring.memberAt(e+1)}}class b{constructor(e){this.rawUrl=e}matches(e){if(this.url==null)return!1;const n=w(e);return n==null?!1:c(this.url)===c(n)}get url(){try{return this._url??(this._url=new URL(this.rawUrl))}catch{return null}}}function c(t){return t.hostname.replace(/^www\./,"")}class m{constructor(e,n){this.realUrl=e,this.hint=n}matches(e){return this.scopes.some(n=>n.matches(e))}get scopes(){return[this.realUrl,this.hint].filter(f).map(e=>new b(e))}}function f(t){return t!=null}function p(t,e,n){const i=new m(e,n);return x(new h(t).portalAt(i))}function x(t){return`
     <div class="wwwebring-widget">
       <div class="wwwebring-hub">
-        <a href="${o(t.hubUrl)}">${a(t.hubTitle)}</a>
+        <a href="${a(t.hubUrl)}">${o(t.hubTitle)}</a>
       </div>
       <div class="wwwebring-ring-links">
         <span class="wwwebring-prev">
-          <a href="${o(t.prevUrl)}">${a(t.prevTitle)}</a>
+          <a href="${a(t.prevUrl)}">${o(t.prevTitle)}</a>
         </span>
         <span class="wwwebring-divider"></span>
         <span class="wwwebring-next">
-          <a href="${o(t.nextUrl)}">${a(t.nextTitle)}</a>
+          <a href="${a(t.nextUrl)}">${o(t.nextTitle)}</a>
         </span>
       </div>
     </div>
