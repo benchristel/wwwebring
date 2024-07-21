@@ -44,14 +44,16 @@ To set these variables, you can add them to a `style` attribute on the widget `d
 
 The webring widget looks at the current URL of the page to figure out which site it's on and thus where the "previous" and "next" links should go to. If you have a mirror of your main site, or a local development server, and you want the widget to display the correct links there, you'll have to do a tiny bit of extra configuration.
 
-Add a data-wwwebring-you-are-here attribute to your HTML, like this:
+Add a `data-wwwebring-you-are-here` attribute to your HTML, like this:
 
+```html
 <div
   data-wwwebring="https://waywardweb.org/ring.json"
   data-wwwebring-theme="default"
   data-wwwebring-you-are-here="https://yoursite.example.com"
 ></div>
-Host a JSON file
+```
+
 Replace https://yoursite.example.com with the URL of your main site.
 
 If the widget can't figure out which site it's on based on the real URL of the page, it will look at the `data-wwwebring-you-are-here` attribute instead. If that attribute isn't present, or isn't the URL of a site that belongs to the webring, the "next" and "previous" links will default to the first and last sites in the webring, respectively.
