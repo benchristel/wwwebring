@@ -38,7 +38,12 @@ test("a webring with no members", {
     const ring = new Ring(baseConfig)
     expect(ring.memberAt(0).name, equals, "Test ring")
     expect(ring.memberAt(0).url, equals, "https://hub.com")
-  }
+  },
+
+  "has a single site, the hub"() {
+    const sites = [...new Ring(baseConfig).sites()]
+    expect(sites, equals, [{url: "https://hub.com", name: "Test ring"}])
+  },
 })
 
 const oneMemberConfig: Config = {
@@ -106,6 +111,14 @@ test("a ring with one member", {
       name: "First",
       url: "https://first.one/dir/index.html",
     })
+  },
+
+  "has two sites, the hub and the member"() {
+    const sites = [...new Ring(oneMemberConfig).sites()]
+    expect(sites, equals, [
+      {url: "https://hub.com", name: "Test ring"},
+      {url: "https://first.one/dir/index.html", name: "First"},
+    ])
   },
 })
 

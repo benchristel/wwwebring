@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@benchristel/taste@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@benchristel/taste/-/taste-0.5.0.tgz#c595e9937cede23feaec3081f7333e6c766073c2"
-  integrity sha512-xr0QL76NohYOMG94O1Tr9N4piH3SzVztznbbZyUDZRZjivcqqUqVyBuQV/KvNUUg4dbntlMEAkidMLB9whHTIg==
+"@benchristel/taste@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@benchristel/taste/-/taste-0.6.0.tgz#c49819b72c1aa12251b93f239b1faf20f01a0303"
+  integrity sha512-+PNsgwYRKgZQLCUGFCGLRbPTIpJYsyhMr5935ZjEdWlAjm6N0aj0jd80uGqNSgLJOhlmGCQhrZyzhPfXHJTBwg==
 
 "@esbuild/aix-ppc64@0.20.2":
   version "0.20.2"
@@ -223,6 +223,13 @@
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.5.tgz#a6ce3e556e00fd9895dd872dd172ad0d4bd687f4"
   integrity sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==
+
+"@types/node@^22.4.0":
+  version "22.4.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.4.0.tgz#c295fe1d6f5f58916cc61dbef8cf65b5b9b71de9"
+  integrity sha512-49AbMDwYUz7EXxKU/r7mXOsxwFr4BYbvB7tWYxVuLdb2ibd30ijjXINSMAHiEEZk5PCRBmW1gUeisn2VMKt3cQ==
+  dependencies:
+    undici-types "~6.19.2"
 
 ansi-regex@^5.0.1:
   version "5.0.1"
@@ -500,6 +507,11 @@ typescript@^5.4.5:
   version "5.4.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.4.5.tgz#42ccef2c571fdbd0f6718b1d1f5e6e5ef006f611"
   integrity sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==
+
+undici-types@~6.19.2:
+  version "6.19.6"
+  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.19.6.tgz#e218c3df0987f4c0e0008ca00d6b6472d9b89b36"
+  integrity sha512-e/vggGopEfTKSvj4ihnOLTsqhrKRN3LeO6qSN/GxohhuRv8qH9bNQ4B8W7e/vFL+0XTnmHPB4/kegunZGA4Org==
 
 vite@^5.2.12:
   version "5.2.12"

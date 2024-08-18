@@ -1,12 +1,19 @@
 import type {Config, Linkable} from "./config";
 import type {PortalLocation} from "./portal-location";
-import type {Scope} from "./scope";
 
 export class Ring {
   constructor(private config: Config) {}
 
   portalAt(location: PortalLocation): Portal {
     return new Portal(this, location);
+  }
+
+  *sites() {
+    const hub = this.hub()
+    yield {name: hub.name, url: hub.url}
+    for (let i = 0; i < this.numMembers(); i++) {
+      yield this.memberAt(i)
+    }
   }
 
   hub(): Linkable {
