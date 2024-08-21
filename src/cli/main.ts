@@ -3,6 +3,7 @@ import {Ring} from "../domain/ring"
 import * as fs from "fs"
 import { sanitizeUrl } from "../lib/urls"
 import { join, dirname } from "path"
+import { htmlEscape } from "../lib/html"
 
 const [configPath, outputDirPath] = process.argv.slice(2)
 
@@ -25,8 +26,23 @@ for (const site of ring.sites()) {
   }
 }
 
+// This HTML uses 3 strategies to ensure the user ends up on the correct page:
+// 1. JavaScript redirect. This is the most immediate; in Firefox it seems to
+//    happen before the initial paint (e.g. the dark mode styling does not take
+//    effect).
+// 2. <meta http-equiv="refresh"> - a fallback for browsers with JS disabled.
+//    Slightly slower and not recommended by W3C.
+// 3. <noscript> text with a link - a fallback for browsers with neither JS nor
+//    support for http-equiv="refresh".
+//
+// If (1) gets used, the redirect page will not appear in the user's
+// browser history. The same goes for (2), probably.
+//
+// Ideally, of course, the server would send a 302 redirect response, so none
+// of this would be needed. But neither GitHub Pages nor Neocities enables
+// sites to specify such redirects.
 function redirectHtml(toName: string, toUrl: string) {
-  const name = toName
+  const name = htmlEscape(toName)
   const url = sanitizeUrl(toUrl)
   return `<!DOCTYPE html>
 <html>
@@ -35,9 +51,13 @@ function redirectHtml(toName: string, toUrl: string) {
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="refresh" content="0;url=${url}">
     <title>Redirect</title>
+    <script type="text/javascript">window.location.replace("${url}")</script>
+    <style>@media(prefers-color-scheme:dark){html{color:#fff;background:#000}a,a:visited{color:#aaf}}</style>
   </head>
   <body>
-    <p>The webring is sending you to <a href="${url}">${name}</a></p>
+    <noscript>
+      <p>The webring is sending you to <a href="${url}">${name}</a>. To continue to that page, <a href="${url}">click here</a>.</p>
+    </noscript>
   </body>
 </html>`
 }
