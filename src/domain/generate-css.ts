@@ -7,7 +7,6 @@ ${container} .wwwebring-widget {
   justify-content: stretch;
   border: var(--wwwebring-border, none);
   background: var(--wwwebring-background, transparent);
-  color: var(--wwwebring-text-color, #000);
   padding-block: 0.5em;
   text-align: center;
 }
@@ -16,7 +15,7 @@ ${container} .wwwebring-widget a {
   display: inline-block;
   padding: 0.75em;
   font-weight: bold;
-  color: inherit;
+  color: var(--wwwebring-text-color, inherit);
 }
 
 ${container} .wwwebring-ring-links {

@@ -3,13 +3,15 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
   </head>
-  <body>
+  <body style="color: blue">
     <script defer type="module" src="src/index.ts"></script>
+    <p>The widget below has custom styling: a dashed purple border and green text.</p>
     <div
       style="--wwwebring-text-color: green; --wwwebring-background: url(https://placekitten.com/200/300); --wwwebring-border: 5px dashed purple"
       data-wwwebring="example-ring.json"
       data-wwwebring-theme="default"
     ></div>
+    <p>The widget below inherits its text color from the body. The text should be blue.</p>
     <div
       data-wwwebring="example-ring.json#2"
       data-wwwebring-theme="default"
